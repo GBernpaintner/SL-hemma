@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Your command is next.
+cd /Users/noblocks/PycharmProjects/stop_searcher || exit
+python3 stop_controller.py

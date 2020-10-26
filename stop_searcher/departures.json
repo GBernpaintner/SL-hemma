@@ -1,0 +1,106 @@
+{
+  "StatusCode": 0,
+  "Message": null,
+  "ExecutionTime": 158,
+  "ResponseData": {
+    "LatestUpdate": "2020-10-26T04:41:38",
+    "DataAge": 7,
+    "Metros": [],
+    "Buses": [
+      {
+        "GroupOfLine": null,
+        "TransportMode": "BUS",
+        "LineNumber": "697",
+        "Destination": "Centralen",
+        "JourneyDirection": 1,
+        "StopAreaName": "Sollentuna station",
+        "StopAreaNumber": 50501,
+        "StopPointNumber": 52907,
+        "StopPointDesignation": "F",
+        "TimeTabledDateTime": "2020-10-26T04:40:00",
+        "ExpectedDateTime": "2020-10-26T04:41:51",
+        "DisplayTime": "Nu",
+        "JourneyNumber": 30307,
+        "Deviations": null
+      },
+      {
+        "GroupOfLine": "blåbuss",
+        "TransportMode": "BUS",
+        "LineNumber": "179",
+        "Destination": "Vällingby",
+        "JourneyDirection": 2,
+        "StopAreaName": "Sollentuna station",
+        "StopAreaNumber": 50501,
+        "StopPointNumber": 52909,
+        "StopPointDesignation": "E",
+        "TimeTabledDateTime": "2020-10-26T05:05:00",
+        "ExpectedDateTime": "2020-10-26T05:05:00",
+        "DisplayTime": "05:05",
+        "JourneyNumber": 20007,
+        "Deviations": null
+      }
+    ],
+    "Trains": [
+      {
+        "SecondaryDestinationName": null,
+        "GroupOfLine": "Pendeltåg",
+        "TransportMode": "TRAIN",
+        "LineNumber": "40",
+        "Destination": "Uppsala C",
+        "JourneyDirection": 2,
+        "StopAreaName": "Sollentuna",
+        "StopAreaNumber": 5061,
+        "StopPointNumber": 5062,
+        "StopPointDesignation": "2",
+        "TimeTabledDateTime": "2020-10-26T04:54:00",
+        "ExpectedDateTime": "2020-10-26T04:54:00",
+        "DisplayTime": "12 min",
+        "JourneyNumber": 2202,
+        "Deviations": [
+          {
+            "Text": "Resa förbi Arlanda C kräver både UL- och SL- biljett.",
+            "Consequence": "INFORMATION",
+            "ImportanceLevel": 5
+          }
+        ]
+      },
+      {
+        "SecondaryDestinationName": null,
+        "GroupOfLine": "Pendeltåg",
+        "TransportMode": "TRAIN",
+        "LineNumber": "40",
+        "Destination": "Södertälje centrum",
+        "JourneyDirection": 1,
+        "StopAreaName": "Sollentuna",
+        "StopAreaNumber": 5061,
+        "StopPointNumber": 5061,
+        "StopPointDesignation": "3",
+        "TimeTabledDateTime": "2020-10-26T05:06:00",
+        "ExpectedDateTime": "2020-10-26T05:06:00",
+        "DisplayTime": "24 min",
+        "JourneyNumber": 2205,
+        "Deviations": null
+      },
+      {
+        "SecondaryDestinationName": null,
+        "GroupOfLine": "Pendeltåg",
+        "TransportMode": "TRAIN",
+        "LineNumber": "41",
+        "Destination": "Märsta",
+        "JourneyDirection": 2,
+        "StopAreaName": "Sollentuna",
+        "StopAreaNumber": 5061,
+        "StopPointNumber": 5062,
+        "StopPointDesignation": "2",
+        "TimeTabledDateTime": "2020-10-26T05:09:00",
+        "ExpectedDateTime": "2020-10-26T05:09:00",
+        "DisplayTime": "05:09",
+        "JourneyNumber": 2902,
+        "Deviations": null
+      }
+    ],
+    "Trams": [],
+    "Ships": [],
+    "StopPointDeviations": []
+  }
+}
