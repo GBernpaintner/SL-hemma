@@ -1,6 +1,9 @@
 import requests
 
 
+# Not that endpoints might have changed.
+
+
 key = "8d8b02694dac481caed6bc9698171fdb"
 
 

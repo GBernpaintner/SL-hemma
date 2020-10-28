@@ -10,6 +10,7 @@ def argers(**kwargs):
 
 
 def calculate_departures(search_string):
+    # Calculate only for specific lines and multiple lines TODO
     stops_response = get_stops_matching(SearchString=search_string, Key="8d8b02694dac481caed6bc9698171fdb", MaxResults=1)
     SiteId = stops_response["ResponseData"][0]["SiteId"]
     real_time_departures_response = get_real_time_departures(SiteId=SiteId, Key="ee24b995666e4dad8cb80dd1f0433822")
