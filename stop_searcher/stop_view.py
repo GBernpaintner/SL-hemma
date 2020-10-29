@@ -6,8 +6,10 @@ def start_stop_view(calculate_departures):
     root = Tk()
     TITLE = "Stop Viewer"
     root.title(TITLE)
+    root.grid_rowconfigure(0, weight=1)
+    root.grid_columnconfigure(0, weight=1)
     mainframe = ttk.Frame(root)
-    mainframe.grid(row=0, column=0, sticky=NSEW)
+    mainframe.grid(row=0, column=0, sticky='nsew')
 
     search_container = ttk.Label(mainframe)
     search_container.grid(row=0, column=0, sticky=EW)
