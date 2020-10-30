@@ -35,6 +35,7 @@ def start_stop_view(calculate_departures):
 
         for slave in search_results.grid_slaves():
             slave.destroy()
+        departures = departures[:20]
         for i, departure in enumerate(departures):
             ttk.Label(search_results, text=departure["DisplayTime"]).grid(row=i, column=0, sticky=EW)
             ttk.Label(search_results, text=departure["LineNumber"]).grid(row=i, column=1, sticky=EW)
