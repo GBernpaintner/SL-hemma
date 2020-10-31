@@ -1,5 +1,18 @@
 from tkinter import *
 from tkinter import ttk
+from datetime import datetime
+from math import floor
+
+# TODO debug
+from pprint import pprint
+
+
+def calulate_remaining_time(time_string):
+    date = datetime.strptime(time_string, '%Y-%m-%dT%H:%M:%S')
+    now = datetime.today()
+    delta = date - now
+    print(floor(delta.seconds / 60))
+    return f'{floor(delta.seconds / 60)} min'
 
 
 def start_stop_view(calculate_departures):
@@ -37,10 +50,17 @@ def start_stop_view(calculate_departures):
             slave.destroy()
         departures = departures[:20]
         for i, departure in enumerate(departures):
-            ttk.Label(search_results, text=departure["DisplayTime"]).grid(row=i, column=0, sticky=EW)
+            time_remaining = calulate_remaining_time(departure['ExpectedDateTime'])
+            ttk.Label(search_results, text=time_remaining).grid(row=i, column=0, sticky=EW)
             ttk.Label(search_results, text=departure["LineNumber"]).grid(row=i, column=1, sticky=EW)
             ttk.Label(search_results, text=departure["Destination"]).grid(row=i, column=2, sticky=EW)
             ttk.Label(search_results, text=departure["GroupOfLine"]).grid(row=i, column=3, sticky=EW)
+
+        # TODO debug
+        try:
+            pprint(departures[-1])
+        except:
+            pass
 
     root.bind("<Return>", lambda *args: search(gui_search_string.get(), gui_stop_name))
 
