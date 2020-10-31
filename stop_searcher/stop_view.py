@@ -8,11 +8,10 @@ from pprint import pprint
 
 
 def calulate_remaining_time(time_string):
-    date = datetime.strptime(time_string, '%Y-%m-%dT%H:%M:%S')
+    date = datetime.fromisoformat(time_string)
     now = datetime.today()
     delta = date - now
-    print(floor(delta.seconds / 60))
-    return f'{floor(delta.seconds / 60)} min'
+    return f'{delta.seconds // 60} min'
 
 
 def start_stop_view(calculate_departures):
