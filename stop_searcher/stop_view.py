@@ -52,8 +52,9 @@ def start_stop_view(calculate_departures):
             time_remaining = calulate_remaining_time(departure['ExpectedDateTime'])
             ttk.Label(search_results, text=time_remaining).grid(row=i, column=0, sticky=EW)
             ttk.Label(search_results, text=departure["LineNumber"]).grid(row=i, column=1, sticky=EW)
-            ttk.Label(search_results, text=departure["Destination"]).grid(row=i, column=2, sticky=EW)
-            ttk.Label(search_results, text=departure["GroupOfLine"]).grid(row=i, column=3, sticky=EW)
+            ttk.Label(search_results, text=departure['StopAreaName']).grid(row=i, column=2, sticky=EW)
+            ttk.Label(search_results, text=departure["Destination"]).grid(row=i, column=3, sticky=EW)
+            ttk.Label(search_results, text=departure["GroupOfLine"]).grid(row=i, column=4, sticky=EW)
 
         # TODO debug
         try:
