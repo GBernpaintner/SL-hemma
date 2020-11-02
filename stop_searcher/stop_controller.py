@@ -4,9 +4,36 @@ import json
 from datetime import datetime
 
 
+# TODO function for personal learning, remove this
 def argers(**kwargs):
     return dict({"a":3, "B":"not wow"}, **kwargs)
 #print(argers(A="r", B="wow", Cx=54))
+
+
+def process_departures_response(response):
+    return [
+        *response["ResponseData"]["Metros"],
+        *response["ResponseData"]["Buses"],
+        *response["ResponseData"]["Trains"],
+        *response["ResponseData"]["Trams"],
+        *response["ResponseData"]["Ships"],
+    ]
+
+
+def get_departures_from(SiteIds):
+    departures = []
+    for SiteId in SiteIds:
+        real_time_departures_response = get_real_time_departures(
+                SiteId=SiteId,
+                Key="ee24b995666e4dad8cb80dd1f0433822")
+        departures += process_departures_response(real_time_departures_response)
+
+    # TODO debug
+    with open("departures.json", "w", encoding="utf8") as savefile:
+        json.dump(real_time_departures_response, savefile, ensure_ascii=False, indent=4)
+
+    departures.sort(key=lambda x: datetime.fromisoformat(x["ExpectedDateTime"]))
+    return departures
 
 
 def calculate_departures(search_string):
@@ -33,4 +60,5 @@ def calculate_departures(search_string):
     return departures
 
 
-start_stop_view(calculate_departures)
+if __name__ == '__main__':
+    start_stop_view(calculate_departures)
