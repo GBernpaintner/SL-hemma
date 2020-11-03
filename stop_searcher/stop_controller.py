@@ -61,4 +61,4 @@ def calculate_departures(search_string):
 
 
 if __name__ == '__main__':
-    start_stop_view(calculate_departures)
+    start_stop_view(get_departures_from)

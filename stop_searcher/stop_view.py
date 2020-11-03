@@ -11,10 +11,25 @@ def calulate_remaining_time(time_string):
     date = datetime.fromisoformat(time_string)
     now = datetime.today()
     delta = date - now
-    return f'{delta.seconds // 60} min'
+    minutes = delta.seconds // 60 if delta.days >= 0 else 0
+    return f'{minutes} min' if minutes > 0 else 'Nu'
 
 
-def start_stop_view(calculate_departures):
+def generate_departures_row(parent, departure, row):
+    time_remaining = calulate_remaining_time(departure['ExpectedDateTime'])
+    ttk.Label(parent, text=time_remaining).grid(row=row, column=0, sticky=EW)
+    ttk.Label(parent, text=departure["LineNumber"]).grid(row=row, column=1, sticky=EW)
+    ttk.Label(parent, text=departure['StopAreaName']).grid(row=row, column=2, sticky=EW)
+    ttk.Label(parent, text=departure["Destination"]).grid(row=row, column=3, sticky=EW)
+    ttk.Label(parent, text=departure["GroupOfLine"]).grid(row=row, column=4, sticky=EW)
+
+
+def generate_departures_table(parent, departures):
+    for row, departure in enumerate(departures):
+        generate_departures_row(parent, departure, row)
+
+
+def start_stop_view(get_departures_from_SiteIds):
     root = Tk()
     TITLE = "Stop Viewer"
     root.title(TITLE)
@@ -40,7 +55,10 @@ def start_stop_view(calculate_departures):
     def search(search_string, stop_name_string_var):
         departures = []
         try:
-            departures = calculate_departures(search_string)
+            # liljeholmen: 9294
+            # Valla Torg:  1525
+            # Årsta Torg:  1500
+            departures = get_departures_from_SiteIds([1525, 1500])
             stop_name_string_var.set(departures[0]["StopAreaName"])
         except IndexError:
             pass
@@ -48,13 +66,7 @@ def start_stop_view(calculate_departures):
         for slave in search_results.grid_slaves():
             slave.destroy()
         departures = departures[:20]
-        for i, departure in enumerate(departures):
-            time_remaining = calulate_remaining_time(departure['ExpectedDateTime'])
-            ttk.Label(search_results, text=time_remaining).grid(row=i, column=0, sticky=EW)
-            ttk.Label(search_results, text=departure["LineNumber"]).grid(row=i, column=1, sticky=EW)
-            ttk.Label(search_results, text=departure['StopAreaName']).grid(row=i, column=2, sticky=EW)
-            ttk.Label(search_results, text=departure["Destination"]).grid(row=i, column=3, sticky=EW)
-            ttk.Label(search_results, text=departure["GroupOfLine"]).grid(row=i, column=4, sticky=EW)
+        generate_departures_table(search_results, departures)
 
         # TODO debug
         try:
