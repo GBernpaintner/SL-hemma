@@ -16,12 +16,14 @@ def calulate_remaining_time(time_string):
 
 
 def generate_departures_row(parent, departure, row):
+    ttk.Label(parent, text=departure['StopAreaName']).grid(row=row, column=0, sticky=EW)
     time_remaining = calulate_remaining_time(departure['ExpectedDateTime'])
-    ttk.Label(parent, text=time_remaining).grid(row=row, column=0, sticky=EW)
-    ttk.Label(parent, text=departure["LineNumber"]).grid(row=row, column=1, sticky=EW)
-    ttk.Label(parent, text=departure['StopAreaName']).grid(row=row, column=2, sticky=EW)
+    ttk.Label(parent, text=time_remaining).grid(row=row, column=1, sticky=EW)
+    line = departure['GroupOfLine'] 
+    if departure['TransportMode'] == 'BUS':
+        line = f'Buss {departure["LineNumber"]}' 
+    ttk.Label(parent, text=line).grid(row=row, column=2, sticky=EW)
     ttk.Label(parent, text=departure["Destination"]).grid(row=row, column=3, sticky=EW)
-    ttk.Label(parent, text=departure["GroupOfLine"]).grid(row=row, column=4, sticky=EW)
 
 
 def generate_departures_table(parent, departures):
