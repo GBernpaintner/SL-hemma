@@ -16,13 +16,18 @@ def calulate_remaining_time(time_string):
 
 
 def generate_departures_row(parent, departure, row):
-    ttk.Label(parent, text=departure['StopAreaName']).grid(row=row, column=0, sticky=EW)
+    TABLE_COLUMN_PADDING = 16
+    TABLE_ROW_PADDING = 4
+    stop = ttk.Label(parent, text=departure['StopAreaName'])
+    stop.grid(row=row, column=0, padx=(0, TABLE_COLUMN_PADDING), pady=(0, TABLE_ROW_PADDING), sticky=EW)
     time_remaining = calulate_remaining_time(departure['ExpectedDateTime'])
-    ttk.Label(parent, text=time_remaining).grid(row=row, column=1, sticky=EW)
+    time = ttk.Label(parent, text=time_remaining)
+    time.grid(row=row, column=1, padx=(0, TABLE_COLUMN_PADDING), pady=(0, TABLE_ROW_PADDING), sticky=EW)
     line = departure['GroupOfLine'] 
     if departure['TransportMode'] == 'BUS':
         line = f'Buss {departure["LineNumber"]}' 
-    ttk.Label(parent, text=line).grid(row=row, column=2, sticky=EW)
+    line_name = ttk.Label(parent, text=line)
+    line_name.grid(row=row, column=2, padx=(0, TABLE_COLUMN_PADDING), pady=(0, TABLE_ROW_PADDING), sticky=EW)
     ttk.Label(parent, text=departure["Destination"]).grid(row=row, column=3, sticky=EW)
 
 
@@ -40,30 +45,18 @@ def start_stop_view(get_departures_from_SiteIds):
     mainframe = ttk.Frame(root)
     mainframe.grid(row=0, column=0, sticky='nsew')
 
-    search_container = ttk.Label(mainframe)
-    search_container.grid(row=0, column=0, sticky=EW)
-    gui_search_string = StringVar()
-    ttk.Label(search_container, text="Hållplats:").grid(row=0, column=0)
-    ttk.Entry(search_container, textvariable=gui_search_string).grid(row=0, column=1)
+    title = ttk.Label(mainframe, text='Avgångar')
+    title.grid(row=1, column=0, sticky=EW)
 
-    gui_stop_name = StringVar()
-    stop_name = ttk.Label(mainframe, textvariable=gui_stop_name)
-    stop_name.grid(row=1, column=0, sticky=EW)
-
-    # todo Listbox
     search_results = ttk.Frame(mainframe)
     search_results.grid(row=2, column=0, sticky=EW)
 
-    def search(search_string, stop_name_string_var):
+    def search():
         departures = []
-        try:
-            # liljeholmen: 9294
-            # Valla Torg:  1525
-            # Årsta Torg:  1500
-            departures = get_departures_from_SiteIds([1525, 1500])
-            stop_name_string_var.set(departures[0]["StopAreaName"])
-        except IndexError:
-            pass
+        # liljeholmen: 9294
+        # Valla Torg:  1525
+        # Årsta Torg:  1500
+        departures = get_departures_from_SiteIds([1525, 1500])
 
         for slave in search_results.grid_slaves():
             slave.destroy()
@@ -74,8 +67,9 @@ def start_stop_view(get_departures_from_SiteIds):
         try:
             pprint(departures[-1])
         except:
-            pass
+            print('no departures')
 
-    root.bind("<Return>", lambda *args: search(gui_search_string.get(), gui_stop_name))
+    root.bind("<Return>", lambda *args: search())
+    search()
 
     root.mainloop()
