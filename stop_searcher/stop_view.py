@@ -45,8 +45,10 @@ def start_stop_view(get_departures_from_SiteIds):
     mainframe = ttk.Frame(root)
     mainframe.grid(row=0, column=0, sticky='nsew')
 
-    title = ttk.Label(mainframe, text='Avgångar')
-    title.grid(row=1, column=0, sticky=EW)
+    TITLE_PADDING = 8
+    title = ttk.Label(mainframe, text='Avgångar', )
+    title.config(anchor=CENTER)
+    title.grid(row=1, column=0, pady=TITLE_PADDING, sticky=EW)
 
     search_results = ttk.Frame(mainframe)
     search_results.grid(row=2, column=0, sticky=EW)
