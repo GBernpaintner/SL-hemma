@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from datetime import datetime
 from math import floor
+from PIL import ImageTk, Image
 
 # TODO debug
 from pprint import pprint
@@ -44,6 +45,11 @@ def start_stop_view(get_departures_from_SiteIds):
     root.grid_columnconfigure(0, weight=1)
     mainframe = ttk.Frame(root)
     mainframe.grid(row=0, column=0, sticky='nsew')
+
+    canvas = Canvas(mainframe)
+    canvas.place(x=0, y=0, relwidth=1, relheight=1)
+    background_image = ImageTk.PhotoImage(Image.open('resources/background_image.jpg'))
+    canvas.create_image(0, 0, anchor=NW, image=background_image)
 
     TITLE_PADDING = 8
     title = ttk.Label(mainframe, text='Avgångar', )
