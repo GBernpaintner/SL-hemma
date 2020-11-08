@@ -8,6 +8,10 @@ from PIL import ImageTk, Image
 from pprint import pprint
 
 
+def make_transparent(widget):
+    pass
+
+
 def calulate_remaining_time(time_string):
     date = datetime.fromisoformat(time_string)
     now = datetime.today()
