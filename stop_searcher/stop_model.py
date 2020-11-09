@@ -32,4 +32,6 @@ def get_real_time_departures(*, SiteId, Key, TimeWindow=30, **additional_params)
         "SiteId": SiteId,
     }, **additional_params)
     response = requests.get(url, params)
-    return response.json()
+    departures = response.json()
+    # concatenate, turn dates into dates, etc
+    return departures
