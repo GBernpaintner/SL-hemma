@@ -3,20 +3,21 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from stop_controller import get_departures_from
+from kivy.clock import Clock
 
 
 class Table(GridLayout):
     def __init__(self, **kwargs):
-        self._source = kwargs.pop('source', None)
+        self.source = kwargs.pop('source', None)
         self._entry_maps = kwargs.pop('entry_maps', None)
         super().__init__(**kwargs)
 
 
     def update(self):
         try:
-            self._entries = self._source()
+            self._entries = self.source()
         except TypeError as e:
-            self._entries = self._source
+            self._entries = self.source
         self.cols = len(self._entry_maps)
         # Remove old children.
         self.clear_widgets()
@@ -24,7 +25,6 @@ class Table(GridLayout):
         for entry in self._entries:
             for entry_map in self._entry_maps:
                 self.add_widget(entry_map(entry))
-                print(f'adding {entry} as {entry_map(entry)}')
 
 
     # This is a list containing the objects/things that are passed to
@@ -56,6 +56,7 @@ class MainApp(App):
         ems = [first, second, third]
         t = Table(source=lambda: get_departures_from([1525, 1500]), entry_maps=ems)
         t.update()
+        Clock.schedule_interval(lambda dt: t.update(), 10)
         return t
 
 
