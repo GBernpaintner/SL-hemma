@@ -2,8 +2,8 @@ from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
-from stop_controller import get_departures_from
 from kivy.clock import Clock
+from data_source import get_departures_from
 
 
 class Table(GridLayout):
