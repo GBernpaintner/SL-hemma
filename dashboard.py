@@ -5,7 +5,7 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.clock import Clock
 from kivy.graphics import Color, Rectangle
 from table import Table
-from stop_controller import get_departures_from
+from data_source import get_departures_from
 
 
 class Dashboard(App):
