@@ -1,7 +1,7 @@
 # Project specific
 
-stop_searcher/departures.json
-stop_searcher/savefile.json
+departures.json
+savefile.json
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,macos,windows,vim,pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,macos,windows,vim,pycharm
