@@ -8,7 +8,7 @@ key = "8d8b02694dac481caed6bc9698171fdb"
 
 # for additional_params, see SL Platsuppslag at trafiklab.se.
 # https://www.trafiklab.se/api/sl-platsuppslag/dokumentation
-def get_stops_matching(*, SearchString, Key, **additional_params):
+def request_stops_matching(*, SearchString, Key, **additional_params):
     url = "https://api.sl.se/api2/typeahead.json"
     params = dict({
         "Key": Key,
@@ -23,7 +23,7 @@ key = "ee24b995666e4dad8cb80dd1f0433822"
 
 # for additional_params, see SL Realtidsinformation 4 at trafiklab.se.
 # https://www.trafiklab.se/node/15754/documentation
-def get_real_time_departures(*, SiteId, Key, TimeWindow=30, **additional_params):
+def request_real_time_departures(*, SiteId, Key, TimeWindow=30, **additional_params):
     url = "https://api.sl.se/api2/realtimedeparturesV4.json"
     params = dict({
         "Key": Key,
@@ -36,7 +36,7 @@ def get_real_time_departures(*, SiteId, Key, TimeWindow=30, **additional_params)
     return departures
 
 
-def process_departures_response(response):
+def process_departures(response):
     return [
         *response["ResponseData"]["Metros"],
         *response["ResponseData"]["Buses"],
@@ -49,14 +49,13 @@ def process_departures_response(response):
 def get_departures_from(SiteIds):
     departures = []
     for SiteId in SiteIds:
-        real_time_departures_response = get_real_time_departures(
+        real_time_departures = request_real_time_departures(
                 SiteId=SiteId,
                 Key="ee24b995666e4dad8cb80dd1f0433822")
-        departures += process_departures_response(real_time_departures_response)
+        departures += process_departures(real_time_departures)
 
-    # TODO debug
     with open("departures.json", "w", encoding="utf8") as savefile:
-        json.dump(real_time_departures_response, savefile, ensure_ascii=False, indent=4)
+        json.dump(real_time_departures, savefile, ensure_ascii=False, indent=4)
 
     departures.sort(key=lambda x: datetime.fromisoformat(x["ExpectedDateTime"]))
     return departures

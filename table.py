@@ -3,7 +3,7 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.clock import Clock
-from data_source import get_departures_from
+from traffic_data_source import get_departures_from
 
 
 class Table(GridLayout):
