@@ -8,6 +8,7 @@ from kivy.uix.image import Image
 from table import Table
 from traffic_data_source import get_departures_from
 from weather_data_source import get_forecast, WeatherInfo
+from datetime import datetime
 
 
 class Dashboard(App):
@@ -28,11 +29,13 @@ class Dashboard(App):
 
         def wfirst(entry):
             code = entry["condition"]["code"]
-            wi = WeatherInfo()
-            icon = [condition['icon'] for condition in wi.conditions if condition['code'] == code][0]
+            icon = [condition['icon'] for condition in WeatherInfo.conditions if condition['code'] == code][0]
             return Image(source=f'resources/weather_icons_64x64/day/{icon}.png')
-        ems = [wfirst]
-        weather_table = Table(source=lambda: get_forecast()[:12], entry_maps=ems)
+        def wsecond(entry):
+            time = datetime.fromisoformat(entry['time'])
+            return Label(text=str(time.hour))
+        ems = [wfirst,wsecond]
+        weather_table = Table(source=lambda: get_forecast()[:24], entry_maps=ems)
         weather_table.update()
         weather_table.size_hint_x = None
         weather_table.width = 600

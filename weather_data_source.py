@@ -3,9 +3,8 @@ import requests
 
 
 class WeatherInfo:
-    def __init__(self):
-        with open('resources/weather_conditions.json') as f:
-            self.conditions = json.load(f)
+    with open('resources/weather_conditions.json') as f:
+        conditions = json.load(f)
 
 
 key = '06b0d00b98214b5dae880412202111'
