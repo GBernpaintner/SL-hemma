@@ -3,7 +3,7 @@ import requests
 
 
 class WeatherInfo:
-    with open('resources/weather_conditions.json') as f:
+    with open('resources/weather_conditions.json', encoding='utf8') as f:
         conditions = json.load(f)
 
 
