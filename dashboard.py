@@ -16,11 +16,16 @@ class Dashboard(App):
         # Create time table
         def first(entry):
             return Label(text=entry['StopAreaName'])
+
         def second(entry):
             return Button(text=entry['TransportMode'], background_color=(200,1,1,1))
+
         def third(entry):
             return Label(text=entry['DisplayTime'])
-        ems = [first, second, third]
+
+        def fourth(entry):
+            return Label(text=entry['Destination'])
+        ems = [first, second, third, fourth]
         time_table = Table(source=lambda: get_departures_from([1525, 1500]), entry_maps=ems)
         time_table.update()
         Clock.schedule_interval(lambda dt: time_table.update(), 10)
