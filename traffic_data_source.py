@@ -55,7 +55,7 @@ def get_departures_from(SiteIds):
         departures += process_departures(real_time_departures)
 
     with open("departures.json", "w", encoding="utf8") as savefile:
-        json.dump(real_time_departures, savefile, ensure_ascii=False, indent=4)
+        json.dump(departures, savefile, ensure_ascii=False, indent=4)
 
     departures.sort(key=lambda x: datetime.fromisoformat(x["ExpectedDateTime"]))
     return departures
