@@ -3,7 +3,6 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.clock import Clock
-from traffic_data_source import get_departures_from
 
 
 class Table(GridLayout):
@@ -48,15 +47,12 @@ class Table(GridLayout):
 class MainApp(App):
     def build(self):
         def first(entry):
-            return Label(text=entry['StopAreaName'])
+            return Label(text='hello'])
         def second(entry):
-            return Button(text=entry['TransportMode'], background_color=(200,1,1,1))
-        def third(entry):
-            return Label(text=entry['DisplayTime'])
-        ems = [first, second, third]
-        t = Table(source=lambda: get_departures_from([1525, 1500]), entry_maps=ems)
+            return Button(text=entry['data'], background_color=(200,1,1,1))
+        ems = [first, second]
+        t = Table(source=[{'data': 'data1'}, {'data': 'data2'}]), entry_maps=ems)
         t.update()
-        Clock.schedule_interval(lambda dt: t.update(), 10)
         return t
 
 
