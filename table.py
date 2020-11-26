@@ -47,11 +47,11 @@ class Table(GridLayout):
 class MainApp(App):
     def build(self):
         def first(entry):
-            return Label(text='hello'])
+            return Label(text='hello')
         def second(entry):
             return Button(text=entry['data'], background_color=(200,1,1,1))
         ems = [first, second]
-        t = Table(source=[{'data': 'data1'}, {'data': 'data2'}]), entry_maps=ems)
+        t = Table(source=[{'data': 'data1'}, {'data': 'data2'}], entry_maps=ems)
         t.update()
         return t
 
